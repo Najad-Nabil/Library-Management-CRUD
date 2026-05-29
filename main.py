@@ -138,4 +138,39 @@ def return_book():
         save_data(data)
     
 data = load_data()    
-return_book()
+
+while True:
+    print("Library Management System")
+    print(f"""
+        1. Add Books
+        2. Remove Books
+        3. Search books
+        4. View All Books
+        5. Borrow Books
+        6. Return Books
+        0. Exit
+    """)
+    while True:
+        try:
+            choice = int(input("Enter your choice : "))
+            break
+        except ValueError:
+            print("Invalid input , enter a valid number")
+    
+    if choice == 1:
+        add_book()
+    elif choice == 2:
+        remove_book()
+    elif choice == 3:
+        search_books()
+    elif choice == 4:
+        view_all_books()
+    elif choice == 5:
+        borrow_book()
+    elif choice == 6:
+        return_book()
+    elif choice == 0:
+        break
+    else:
+        print("Enter a valid number")
+
