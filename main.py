@@ -88,7 +88,54 @@ def view_all_books():
     
     if data['book_info'] == []:
         print("Library is empty. No books to borrow")
-        
 
+def borrow_book():
+    found = False
+    while True:
+        try:
+            borrow_id = int(input("Enter the id of the book you want to borrow : "))
+            break
+        except ValueError:
+            print("Invalid input. Enter a valid number")
+
+    for book in data['book_info']:
+        if book['book_id'] == borrow_id:
+            if book['available']:
+                book['available'] = False
+                print("Enjoy the book")
+            else:
+                print(f"{book['book_title']} is currently out of stock")
+            found = True
+            break
+
+    if not found:
+        print(f"Book with ID {borrow_id} does not exists")
+    else:
+        save_data(data)
+
+def return_book():
+    found = False
+    while True:
+        try:
+            return_id = int(input("Enter the ID of the book you want to borrow"))
+            break
+        except ValueError:
+            print("Invalid input, enter a valid nummber")
+        
+    for book in data['book_info']:
+        if book['book_id'] == return_id:
+            if book['available']:
+                print("Book is not being borrowed by anyone")
+            else:
+                book['available'] = True
+                print("Thanks for using our service!!!")
+            found = True
+            break
+    
+    if not found:
+        print("Book don't belong to this library")
+    else:
+        save_data(data)
+    
 data = load_data()    
-view_all_books()
+return_book()
