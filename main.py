@@ -12,7 +12,7 @@ def load_data():
 
 def save_data(data):
     with open("data.json" , "w") as file:
-        json.dump(data , file)
+        json.dump(data , file , indent=4)
 
 def add_book():
     book_title = input("Enter the name of the book : ")
@@ -86,7 +86,7 @@ def view_all_books():
         
         print("-" * 30)
     
-    if data['book_info'] == []:
+    if not data['book_info']:
         print("Library is empty. No books to borrow")
 
 def borrow_book():
@@ -117,7 +117,7 @@ def return_book():
     found = False
     while True:
         try:
-            return_id = int(input("Enter the ID of the book you want to borrow"))
+            return_id = int(input("Enter the ID of the book you want to return : "))
             break
         except ValueError:
             print("Invalid input, enter a valid nummber")
