@@ -50,7 +50,29 @@ def remove_book():
     else:
         print("Book not found")
 
+def search_books():
+    try:
+        search_id = int(input("Enter the id of the book you want to search for : "))
+    except:
+        print("Invalid entry")
+        return
+    
+    found = False
+
+    for book in data["book_info"]:
+        if search_id == book['book_id']:
+            print(f"Book Name : {book['book_title']}")
+            print(f"Author of book : {book['book_author']}")
+            if book['available']:
+                print("Available for borrowing")
+            else:
+                print("Out of stock")
+            found = True
+            break
+    
+    if not found:
+        print("Book doesn't exist")
 
 data = load_data()    
 add_book()
-remove_book()
+search_books()
