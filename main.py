@@ -73,6 +73,22 @@ def search_books():
     if not found:
         print("Book doesn't exist")
 
+def view_all_books():
+    for index , book in enumerate(data['book_info']):
+        print(f"Book No {index + 1}")
+        print(f"Book Name : {book['book_title']}")
+        print(f"Author of book : {book['book_author']}")
+        print(f"ID of the book : {book['book_id']}")
+        if book['available']:
+            print("Available for borrowing")
+        else:
+            print("Out of stock")
+        
+        print("-" * 30)
+    
+    if data['book_info'] == []:
+        print("Library is empty. No books to borrow")
+        
+
 data = load_data()    
-add_book()
-search_books()
+view_all_books()
