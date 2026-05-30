@@ -13,15 +13,7 @@ class Book:
         return self.__str__()
 
     def borrow_book(self):
-        if self.is_available:
-            self.is_available = False
-            print(f"Enjoy reading {self.book_title}")
-        else:
-            print("Currently not available")
+        self.is_available = False
 
     def return_book(self):
-        if not self.is_available:
-            self.is_available = True
-            print(f"Hope you enjoyed {self.book_title}")
-        else:
-            print("Book doesn't belong to this library")
+        self.is_available = True

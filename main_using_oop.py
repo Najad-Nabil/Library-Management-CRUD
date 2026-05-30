@@ -1,10 +1,48 @@
 from library import Library
-    
-
 library = Library()
-library.add_book()
-library.add_book()
-library.view_all_books()
+
+def get_valid_int(message):
+    while True:
+        try:
+            return int(input(message))
+        except ValueError:
+            print("Enter a valid number")
+    
+while True:    
+    print("""1. Add books
+2. Remove book
+3. Search book
+4. View all books
+5. Borrow book
+6. Return book""")
+    
+    choice = get_valid_int("Enter your choice")
+    
+    if choice == 1:
+        library.add_book()
+    elif choice == 2:
+        break
+    elif choice == 3:
+        book_id = get_valid_int("Enter the ID of the book you want to search for")
+
+        book = library.search_book(book_id)
+        if book:
+            print(book)
+        else:
+            print("Book not found")
+
+    elif choice == 4:
+        library.view_all_books()
+    elif choice == 5:
+        break
+    elif choice == 6:
+        break
+    elif choice == 0:
+        break
+    else:
+        print("Enter a valid number")
+
+
 
 
 
