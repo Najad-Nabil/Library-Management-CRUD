@@ -30,9 +30,17 @@ Book ID : {book.book_id}""")
             print("-" * 30)
 
     def search_book(self , book_id):
-        found = False
         for book in self.books:
            if book.book_id == book_id:
                return book
                 
         return None  
+    
+    def borrow_book(self , book_id):
+        book = self.search_book(book_id)
+        if not book:
+            print("Book does not exist")
+        elif not book.is_available:
+            print("Book is currently unavailable")
+        else:
+            book.borrow_book()
