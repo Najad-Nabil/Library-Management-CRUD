@@ -56,6 +56,17 @@ Book ID : {book.book_id}""")
                 print("Availablity : Out of Stock")
             print("-" * 30)
 
+    def search_books(self , book_id):
+        found = False
+        for book in self.books:
+           if book.book_id == book_id:
+               print(book)
+               found = True
+               break
+                
+        if not found:
+           print(f"Book with ID {book_id} does not exist")           
+
         
 
     
