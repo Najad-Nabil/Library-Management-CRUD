@@ -54,4 +54,12 @@ Book ID : {book.book_id}""")
         else:
             book.return_book()
             print(f"Thanks for returning {book.book_title}")
+
+    def remove_book(self , book_id):
+        book = self.search_book(book_id)
+        if not book:
+            print("Book doesn't exist")
+        else:
+            self.books.remove(book)
+            print(f"{book.book_title} removed successfully")
         
