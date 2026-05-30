@@ -15,16 +15,16 @@ while True:
 4. View all books
 5. Borrow book
 6. Return book""")
-    
-    choice = get_valid_int("Enter your choice")
+    choice = get_valid_int("Enter your choice : ")
     
     if choice == 1:
         library.add_book()
+
     elif choice == 2:
         break
-    elif choice == 3:
-        book_id = get_valid_int("Enter the ID of the book you want to search for")
 
+    elif choice == 3:
+        book_id = get_valid_int("Enter the ID of the book you want to search for : ")
         book = library.search_book(book_id)
         if book:
             print(book)
@@ -33,12 +33,16 @@ while True:
 
     elif choice == 4:
         library.view_all_books()
+
     elif choice == 5:
-        break
+        book_id = get_valid_int("Enter the ID of the book you want to borrow : ")
+
     elif choice == 6:
         break
+
     elif choice == 0:
         break
+    
     else:
         print("Enter a valid number")
 

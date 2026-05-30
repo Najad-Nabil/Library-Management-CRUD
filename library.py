@@ -44,3 +44,14 @@ Book ID : {book.book_id}""")
             print("Book is currently unavailable")
         else:
             book.borrow_book()
+
+    def return_book(self , book_id):
+        book = self.search_book(book_id)
+        if not book:
+            print("Book does not exist")
+        elif book.is_available:
+            print("Book doesn't belong to this library")
+        else:
+            book.return_book()
+            print(f"Thanks for returning {book.book_title}")
+        
