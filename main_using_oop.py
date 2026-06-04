@@ -15,6 +15,8 @@ while True:
 4. View all books
 5. Borrow book
 6. Return book
+7. Add member
+8. Remove Member
 0. Exit""")
     choice = get_valid_int("Enter your choice : ")
     
@@ -43,6 +45,13 @@ while True:
     elif choice == 6:
         book_id = get_valid_int("Enter the ID of the book you want to return : ")
         library.return_book(book_id)
+
+    elif choice == 7:
+        name = input("Enter the name of the person : ")
+        library.add_member(name)
+
+    elif choice == 8:
+        continue
 
     elif choice == 0:
         break

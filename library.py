@@ -1,22 +1,30 @@
 import json
 
 from book import Book
+from member import Member
 
 class Library:
 
     def __init__(self):
         self.next_id = 1
+        self.next_member_id = 1
         self.books = []
+        self.members = []
         self.load_data()
 
     def save_data(self):
         data = {
             "next_id" : self.next_id,
-            "books" : []
+            "next_member_id" : self.next_member_id,
+            "books" : [],
+            "members" : []
         }
 
         for book in self.books:
             data["books"].append(book.to_dict())
+
+        for member in self.members:
+            data["members"].append(member.to_dict())
 
         with open("lib-data.json" , "w") as file:
             json.dump(data , file , indent=4)
@@ -26,9 +34,16 @@ class Library:
             with open("lib-data.json" , "r") as file:
                 data = json.load(file)
 
+            self.next_id = data["next_id"]
+            self.next_member_id = data["next_member_id"]
+
             for book_data in data["books"]:
                 book = Book.from_dict(book_data)
                 self.books.append(book)
+
+            for member_data in data["members"]:
+                member = Member.from_dict(member_data)
+                self.members.append(member)
 
         except (FileNotFoundError , json.JSONDecodeError):
             pass
@@ -96,3 +111,8 @@ Book ID : {book.book_id}""")
             self.save_data()
             print(f"{book.book_title} removed successfully")
         
+    def add_member(self , member_name):
+        member = Member(member_name , self.next_member_id)
+        self.members.append(member)
+        self.next_member_id += 1
+        self.save_data()

@@ -5,13 +5,15 @@ class Book:
         self.book_author = book_author
         self.book_id = book_id
         self.is_available = True
+        self.borrowed_by = None
 
     def to_dict(self):
         return {
             "title" : self.book_title,
             "book_author" : self.book_author,
             "book_id" : self.book_id,
-            "is_available" : self.is_available
+            "is_available" : self.is_available,
+            "borrowed_by" : self.borrowed_by
         }
     
     @classmethod
@@ -23,6 +25,7 @@ class Book:
         )
 
         book.is_available = data["is_available"]
+        book.borrowed_by = data["borrowed_by"]
         return book
 
     def __str__(self):
