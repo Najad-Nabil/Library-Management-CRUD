@@ -6,6 +6,25 @@ class Book:
         self.book_id = book_id
         self.is_available = True
 
+    def to_dict(self):
+        return {
+            "title" : self.book_title,
+            "book_author" : self.book_author,
+            "book_id" : self.book_id,
+            "is_available" : self.is_available
+        }
+    
+    @classmethod
+    def from_dict(cls , data):
+        book = cls(
+            data["title"],
+            data["book_author"],
+            data["book_id"]
+        )
+
+        book.is_available = data["is_available"]
+        return book
+
     def __str__(self):
         return f"{self.book_title} by {self.book_author} with ID : {self.book_id}"
     

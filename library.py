@@ -1,3 +1,5 @@
+import json
+
 from book import Book
 
 class Library:
@@ -5,6 +7,28 @@ class Library:
     def __init__(self):
         self.next_id = 1
         self.books = []
+        self.load_data()
+
+    def save_data(self):
+        data = []
+
+        for book in self.books:
+            data.append(book.to_dict())
+
+        with open("lib-data.json" , "w") as file:
+            json.dump(data , file , indent=4)
+
+    def load_data(self):
+        try:
+            with open("lib-data.json" , "r") as file:
+                data = json.load(file)
+
+            for book_data in data:
+                book = Book.from_dict(book_data)
+                self.books.append(book)
+
+        except FileNotFoundError:
+            pass
 
     def add_book(self):
         
