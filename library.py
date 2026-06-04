@@ -10,10 +10,13 @@ class Library:
         self.load_data()
 
     def save_data(self):
-        data = []
+        data = {
+            "next_id" : self.next_id,
+            "books" : []
+        }
 
         for book in self.books:
-            data.append(book.to_dict())
+            data["books"].append(book.to_dict())
 
         with open("lib-data.json" , "w") as file:
             json.dump(data , file , indent=4)
@@ -23,7 +26,7 @@ class Library:
             with open("lib-data.json" , "r") as file:
                 data = json.load(file)
 
-            for book_data in data:
+            for book_data in data["books"]:
                 book = Book.from_dict(book_data)
                 self.books.append(book)
 
@@ -38,10 +41,10 @@ class Library:
         book = Book(book_title , book_author , self.next_id)
 
         self.books.append(book)
-        self.save_data()
 
         print(f"{book.book_title} has been added successfully with ID {self.next_id}")
         self.next_id += 1
+        self.save_data()
 
     def view_all_books(self):
        for index , book in enumerate(self.books , start = 1):
