@@ -27,7 +27,7 @@ class Library:
                 book = Book.from_dict(book_data)
                 self.books.append(book)
 
-        except FileNotFoundError:
+        except (FileNotFoundError , json.JSONDecodeError):
             pass
 
     def add_book(self):
@@ -38,6 +38,8 @@ class Library:
         book = Book(book_title , book_author , self.next_id)
 
         self.books.append(book)
+        self.save_data()
+
         print(f"{book.book_title} has been added successfully with ID {self.next_id}")
         self.next_id += 1
 
@@ -68,6 +70,8 @@ Book ID : {book.book_id}""")
             print("Book is currently unavailable")
         else:
             book.borrow_book()
+            self.save_data()
+            print(f"You borrowed {book.book_title}")
 
     def return_book(self , book_id):
         book = self.search_book(book_id)
@@ -77,6 +81,7 @@ Book ID : {book.book_id}""")
             print("Book doesn't belong to this library")
         else:
             book.return_book()
+            self.save_data()
             print(f"Thanks for returning {book.book_title}")
 
     def remove_book(self , book_id):
@@ -85,5 +90,6 @@ Book ID : {book.book_id}""")
             print("Book doesn't exist")
         else:
             self.books.remove(book)
+            self.save_data()
             print(f"{book.book_title} removed successfully")
         
