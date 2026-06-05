@@ -116,3 +116,10 @@ Book ID : {book.book_id}""")
         self.members.append(member)
         self.next_member_id += 1
         self.save_data()
+
+    def search_member(self , member_id):
+        for member in self.members:
+            if member.member_id == member_id:
+                return member
+        
+        return None

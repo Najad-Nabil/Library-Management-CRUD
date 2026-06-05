@@ -16,7 +16,7 @@ while True:
 5. Borrow book
 6. Return book
 7. Add member
-8. Remove Member
+8. Search Member
 0. Exit""")
     choice = get_valid_int("Enter your choice : ")
     
@@ -51,7 +51,12 @@ while True:
         library.add_member(name)
 
     elif choice == 8:
-        continue
+        member_id = get_valid_int("Enter the ID of the member you want to search for : ")
+        member = library.search_member(member_id)
+        if member:
+            print(member)
+        else:
+            print(f"Member with ID {member_id} does not exist")
 
     elif choice == 0:
         break

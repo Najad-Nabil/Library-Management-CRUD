@@ -19,4 +19,7 @@ class Member:
 
         return member
     
+    def __str__(self):
+        return f"Name : {self.member_name}\nID : {self.member_id}"
+    
 
