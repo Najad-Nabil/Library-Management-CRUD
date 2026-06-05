@@ -17,6 +17,7 @@ while True:
 6. Return book
 7. Add member
 8. Search Member
+9. Remove Member
 0. Exit""")
     choice = get_valid_int("Enter your choice : ")
     
@@ -55,6 +56,14 @@ while True:
         member = library.search_member(member_id)
         if member:
             print(member)
+        else:
+            print(f"Member with ID {member_id} does not exist")
+
+    elif choice == 9:
+        member_id = get_valid_int("Enter the ID of the member you want to remove")
+        member = library.remove_member(member_id)
+        if member:
+            print(f"{member.member_name} successfully deleted")
         else:
             print(f"Member with ID {member_id} does not exist")
 

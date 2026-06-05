@@ -123,3 +123,12 @@ Book ID : {book.book_id}""")
                 return member
         
         return None
+    
+    def remove_member(self , member_id):
+        member = self.search_member(member_id)
+        if member:
+            self.members.remove(member)
+            self.save_data()
+            return member
+        else:
+            return None
