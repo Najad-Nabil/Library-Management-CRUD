@@ -18,6 +18,7 @@ while True:
 7. Add member
 8. Search Member
 9. Remove Member
+10. View books borrowed by a user
 0. Exit""")
     choice = get_valid_int("Enter your choice : ")
     
@@ -71,6 +72,10 @@ while True:
             print(f"Member with ID {member_id} does not exist")
         elif result == "HAS_BOOKS":
             print(f"Person with ID {member_id} currently have books and cannot be deleted")
+
+    elif choice == 10:
+        member_id = get_valid_int("Enter the ID of the member you want get the list of borrowed books of : ")
+        library.view_borrowed_books(member_id)
 
     elif choice == 0:
         break

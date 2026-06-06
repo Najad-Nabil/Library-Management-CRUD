@@ -107,6 +107,8 @@ Book ID : {book.book_id}""")
             member = self.search_member(member_id)
             if member is None:
                 print(f"Member with ID {member_id} does not exist")
+            elif book_id not in member.borrowed_books:
+                print(f"{member.member_name} does not borrow this book")
             else:
                 book.return_book()
                 member.borrowed_books.remove(book_id)
@@ -150,3 +152,15 @@ Book ID : {book.book_id}""")
         self.members.remove(member)
         self.save_data()
         return "MEMBER_DELETED"
+    
+    def view_borrowed_books(self , member_id):
+        member = self.search_member(member_id)
+        if member is None:
+            print(f"No member with ID {member_id} exists")
+        elif not member.borrowed_books:
+            print(f"{member.member_name} hasn't borrowed any books")
+        else:
+            for index , book_id in enumerate(member.borrowed_books , start=1):
+                book = self.search_book(book_id)
+                print(f"{index} : {book.book_title}")
+        
