@@ -41,7 +41,8 @@ while True:
 
     elif choice == 5:
         book_id = get_valid_int("Enter the ID of the book you want to borrow : ")
-        library.borrow_book(book_id)
+        member_id = get_valid_int("Enter the ID of the member who needs the book : ")
+        library.borrow_book(book_id , member_id)
 
     elif choice == 6:
         book_id = get_valid_int("Enter the ID of the book you want to return : ")

@@ -80,27 +80,37 @@ Book ID : {book.book_id}""")
                 
         return None  
     
-    def borrow_book(self , book_id):
+    def borrow_book(self , book_id , member_id):
         book = self.search_book(book_id)
         if not book:
             print("Book does not exist")
         elif not book.is_available:
             print("Book is currently unavailable")
         else:
-            book.borrow_book()
-            self.save_data()
-            print(f"You borrowed {book.book_title}")
+            member = self.search_member(member_id)
+            if member is None:
+                print(f"No member exist with ID {member_id}")
+            else:
+                member.borrowed_books.append(book_id)
+                book.borrow_book()
+                self.save_data()
+                print(f"Enjoy {book.book_title}")
 
-    def return_book(self , book_id):
+    def return_book(self , book_id , member_id):
         book = self.search_book(book_id)
         if not book:
             print("Book does not exist")
         elif book.is_available:
-            print("Book doesn't belong to this library")
+            print("Book already available in this library")
         else:
-            book.return_book()
-            self.save_data()
-            print(f"Thanks for returning {book.book_title}")
+            member = self.search_member(member_id)
+            if member is None:
+                print(f"Member with ID {member_id} does not exist")
+            else:
+                book.return_book()
+                member.borrowed_books.remove(member_id)
+                self.save_data()
+                print(f"Thanks for returning {book.book_title}")
 
     def remove_book(self , book_id):
         book = self.search_book(book_id)
@@ -114,6 +124,7 @@ Book ID : {book.book_id}""")
     def add_member(self , member_name):
         member = Member(member_name , self.next_member_id)
         self.members.append(member)
+        print(f"Member added successfully with ID {self.next_member_id}")
         self.next_member_id += 1
         self.save_data()
 
