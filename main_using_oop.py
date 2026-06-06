@@ -46,7 +46,8 @@ while True:
 
     elif choice == 6:
         book_id = get_valid_int("Enter the ID of the book you want to return : ")
-        library.return_book(book_id)
+        member_id = get_valid_int("Enter the ID of the member who needs to return the book : ")
+        library.return_book(book_id , member_id)
 
     elif choice == 7:
         name = input("Enter the name of the person : ")
