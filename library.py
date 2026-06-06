@@ -93,6 +93,7 @@ Book ID : {book.book_id}""")
             else:
                 member.borrowed_books.append(book_id)
                 book.borrow_book()
+                book.borrowed_by = member_id
                 self.save_data()
                 print(f"Enjoy {book.book_title}")
 
@@ -108,7 +109,8 @@ Book ID : {book.book_id}""")
                 print(f"Member with ID {member_id} does not exist")
             else:
                 book.return_book()
-                member.borrowed_books.remove(member_id)
+                member.borrowed_books.remove(book_id)
+                book.borrowed_by = None
                 self.save_data()
                 print(f"Thanks for returning {book.book_title}")
 
@@ -116,6 +118,9 @@ Book ID : {book.book_id}""")
         book = self.search_book(book_id)
         if not book:
             print("Book doesn't exist")
+        elif book.borrowed_by:
+            member = self.search_member(book.borrowed_by)
+            print(f"Book is currently borrowed by {member.member_name}")
         else:
             self.books.remove(book)
             self.save_data()
@@ -137,9 +142,11 @@ Book ID : {book.book_id}""")
     
     def remove_member(self , member_id):
         member = self.search_member(member_id)
-        if member:
-            self.members.remove(member)
-            self.save_data()
-            return member
-        else:
-            return None
+        
+        if not member:
+            return "MEMBER_NOT_FOUND"
+        if member.borrowed_books:
+            return "HAS_BOOKS"
+        self.members.remove(member)
+        self.save_data()
+        return "MEMBER_DELETED"

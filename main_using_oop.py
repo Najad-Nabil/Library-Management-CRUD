@@ -25,7 +25,7 @@ while True:
         library.add_book()
 
     elif choice == 2:
-        book_id = get_valid_int("Enter the ID of the book you want to remove")
+        book_id = get_valid_int("Enter the ID of the book you want to remove : ")
         library.remove_book(book_id)
 
     elif choice == 3:
@@ -62,12 +62,15 @@ while True:
             print(f"Member with ID {member_id} does not exist")
 
     elif choice == 9:
-        member_id = get_valid_int("Enter the ID of the member you want to remove")
-        member = library.remove_member(member_id)
-        if member:
-            print(f"{member.member_name} successfully deleted")
-        else:
+        member_id = get_valid_int("Enter the ID of the member you want to remove : ")
+        result = library.remove_member(member_id)
+
+        if result == "MEMBER_DELETED":
+            print(f"Member with ID {member_id} successfully deleted")
+        elif result == "MEMBER_NOT_FOUND":
             print(f"Member with ID {member_id} does not exist")
+        elif result == "HAS_BOOKS":
+            print(f"Person with ID {member_id} currently have books and cannot be deleted")
 
     elif choice == 0:
         break
